@@ -54,10 +54,13 @@ axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?&key=1
     console.log(
       `Response: ${response.status} ${response.statusText}`
     );
-    return response.text();
+     const data = JSON.parse(response.data);
   })
   .then(text => console.log(text))
-  .catch(err => console.error(err));
+  .catch(err => console.error(err))
+        
+        console.log(data)
+  
         //const speakOutput = 'foi';
         //const nome = handlerInput.requestenvelope.request.intent.slots['nomecard'].value//pega a variavel nomecard
         const nome = handlerInput.requestEnvelope.request.intent.slots['nomecard'].value;
