@@ -42,20 +42,7 @@ const FraseIntentHandler = {
     },
     handle(handlerInput){
 
-var data = fetch("https://api.trello.com/1/cards?idList=6414eaacdf357282aee076b8&name=teste&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B", {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(data)
-})
-.then(response => response.json())
-.then(data => {
-  console.log('Sucesso:', data);
-})
-.catch((error) => {
-  console.error('Erro:', error);
-});
+
   
        
         const speakOutput= "nao sabemos possivel foi la e fez";
@@ -65,6 +52,7 @@ var data = fetch("https://api.trello.com/1/cards?idList=6414eaacdf357282aee076b8
             .getResponse();
     }
 }
+
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
