@@ -41,8 +41,7 @@ const FraseIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'FraseIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'foi!';
-
+        const speakOutput = 'foi';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
