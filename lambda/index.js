@@ -3,8 +3,8 @@
  * Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
  * session persistence, api calls, and more.
  * */
-const fetch = require('node-fetch');//import do fetch
-
+//const fetch = require('node-fetch');//import do fetch
+const axios = require('axios');
 //const fetch = (...args) => fetchP.then(fn => fn(...args))
 const Alexa = require('ask-sdk-core');
 
