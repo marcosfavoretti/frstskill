@@ -3,8 +3,9 @@
  * Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
  * session persistence, api calls, and more.
  * */
+ const fetch = require('node-fetch');//import do fetch
 const Alexa = require('ask-sdk-core');
-const fetch = require('node-fetch');//import do fetch
+
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
