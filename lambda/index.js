@@ -4,7 +4,7 @@
  * session persistence, api calls, and more.
  * */
 const Alexa = require('ask-sdk-core');
-const fetch = require('node-fetch');//import do fetch
+//const fetch = require('node-fetch');//import do fetch
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
