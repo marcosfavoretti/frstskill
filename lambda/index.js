@@ -63,7 +63,7 @@ axios.get(encodeURIComponent('https://api.trello.com/1/boards/6414eaacdf357282ae
                 break//sai do for 
             }
             else if (nomelist === '' || nomelist === null || nomelist === undefined && nome !== undefined ) {//se nao passar nenhuma lista ele vai colocar na primeira lista e sair do for
-                axios.post('https://api.trello.com/1/cards?idList=' + obj[i].id + '&name=' + nome + '&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B');
+                axios.post(encodeURIComponent('https://api.trello.com/1/cards?idList=' + obj[i].id + '&name=' + nome + '&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B'));
                 break
             }
         }
