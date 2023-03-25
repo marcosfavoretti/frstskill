@@ -4,6 +4,7 @@
  * session persistence, api calls, and more.
  * */
 const Alexa = require('ask-sdk-core');
+const fetch = require('node-fetch');//import do fetch
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -40,6 +41,23 @@ const FraseIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope)==='FraseIntent';//intent que criei
     },
     handle(handlerInput){
+       fetch('https://api.trello.com/1/cards?idList=5abbe4b7ddc1b351ef961414&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json'
+  }
+})
+  .then(response => {
+    console.log(
+      `Response: ${response.status} ${response.statusText}`
+    );
+    return response.text();
+  })
+  .then(text => console.log(text))
+  .catch(err => console.error(err));
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error))
         const speakOutput= "nao sabemos possivel foi la e fez";
         return handlerInput.responseBuilder
             .speak(speakOutput)
