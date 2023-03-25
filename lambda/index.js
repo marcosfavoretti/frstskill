@@ -23,6 +23,23 @@ const LaunchRequestHandler = {
     }
 };//respota do da alexa
 
+const HelloWorldIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
+    },
+    async handle(handlerInput) {
+        //const speakOutput = 'Hello World!';
+        const speakOutput = axios.post('https://api.trello.com/1/cards?idList=6414eaacdf357282aee076b8&name=teste&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B');
+        //let speakOutput = response.value.joke;
+
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .getResponse();
+    }
+};
 
 const CardCreateIntent = {//funçao para criar cartao
   canHandle(handlerInput) {
@@ -33,19 +50,19 @@ const CardCreateIntent = {//funçao para criar cartao
 
 const nome = handlerInput.requestEnvelope.request.intent.slots['nomecard'].value;//nome do card
 const nomelist = handlerInput.requestEnvelope.request.intent.slots['nomelist'].value;//nome da list
-console.log('->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'+nomelist)
+
 axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B')//req para pegar as lists
     .then(response => {
         const obj = JSON.parse(JSON.stringify(response.data))//json parse => obj recebe json
         for (var i in obj) {
 
-    
+    console.log('->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'+ nomelist)
             if (obj[i].name.toLowerCase() === nomelist) {//pegar o valor de todas as listas do quadro
                 //ve se tem a lista com o nome passado se tiver vai adicionar o cartao na lista passada
                 axios.post('https://api.trello.com/1/cards?idList=' + obj[i].id + '&name=' + nome + '&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B');
                 break//sai do for 
             }
-            else if (nomelist === '' || nomelist === null || nomelist === undefined && nome !== undefined ) {//se nao passar nenhuma lista ele vai colocar na primeira lista e sair do for
+            else if (nomelist === '' || nomelist === null || nomelist === undefined && nome !=== undefined ) {//se nao passar nenhuma lista ele vai colocar na primeira lista e sair do for
                 axios.post('https://api.trello.com/1/cards?idList=' + obj[i].id + '&name=' + nome + '&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B');
                 break
             }
