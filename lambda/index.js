@@ -48,30 +48,25 @@ const CardCreateIntent = {//funçao para criar cartao
     },
    async handle(handlerInput) {
 
+const nome = handlerInput.requestEnvelope.request.intent.slots['nomecard'].value;//nome do card
+const nomelist = handlerInput.requestEnvelope.request.intent.slots['nomelist'].value;//nome da list
 
-axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B')
-  .then(response => {
-    console.log(
-      `Response: ${response.status} ${response.statusText}`
-    );
-     const data = JSON.parse(response.data);
-  })
-  .then(text => console.log(text))
-  .catch(err => console.error(err))
-        
-        console.log(data)
-  
-        //const speakOutput = 'foi';
-        //const nome = handlerInput.requestenvelope.request.intent.slots['nomecard'].value//pega a variavel nomecard
-        const nome = handlerInput.requestEnvelope.request.intent.slots['nomecard'].value;
-        const nomelist = handlerInput.requestEnvelope.request.intent.slots['nomelist'].value;
-        if(nomelist !== null){//caso ele nao informar a lista temos que varrer para tentar achar uma lista
-            axios.get('')
-            axios.post('https://api.trello.com/1/cards?idList=6414eaacdf357282aee076b8&name='+nome+'&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B');
+axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B')//req para pegar as lists
+    .then(response => {
+        const obj = JSON.parse(JSON.stringify(response.data))//json parse => obj recebe json
+        for(var i in obj){
+            if (obj[i].name === nomelist){//pegar o valor de todas as listas do quadro
+                //ve se tem a lista com o nome passado se tiver vai adicionar o cartao na lista passada
+                axios.post('https://api.trello.com/1/cards?idList='+obj[i].id+'&name='+nome+'&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B');
+                break//sai do for 
+            }
+            else if(nomelist === '' || nomelist === null){//se nao passar nenhuma lista ele vai colocar na primeira lista e sair do for
+                axios.post('https://api.trello.com/1/cards?idList='+obj[i].id+'&name='+nome+'&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B');
+                break
+            }
         }
-        else{
-            var speakOutput = axios.post('https://api.trello.com/1/cards?idList=6414eaacdf357282aee076b8&name='+nome+'&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B');
-        }
+    })
+    .catch(err => console.error(err))
         return handlerInput.responseBuilder
             .speak('cartao '+ nome +' criado')
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
