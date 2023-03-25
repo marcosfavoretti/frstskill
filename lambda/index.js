@@ -68,7 +68,7 @@ axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?&key=1
     })
     .catch(err => console.error(err))
         return handlerInput.responseBuilder
-            .speak('cartao '+ nome +' criado')
+            .speak('cartao '+ nome +' criado na lista' + nomelist)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
