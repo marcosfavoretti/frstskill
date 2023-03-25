@@ -36,22 +36,20 @@ const HelloWorldIntentHandler = {
 };
 
 const FraseIntentHandler = {
-    canHandle(handlerInput){
-        return Alexa.getRequestType(handlerInput.requestEnvelope)==='IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope)==='FraseIntent';//intent que criei
+  canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'FraseIntent';
     },
-    handle(handlerInput){
+    handle(handlerInput) {
+        const speakOutput = 'foi!';
 
-
-  
-       
-        const speakOutput= "nao sabemos possivel foi la e fez";
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            //.reprompt() nao finaliza o serviço para nao precisar chamar novamente
+            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
-}
+};
+
 
 const HelpIntentHandler = {
     canHandle(handlerInput) {
