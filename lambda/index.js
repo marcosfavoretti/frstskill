@@ -37,7 +37,7 @@ const HelloWorldIntentHandler = {
 const FraseIntentHandler = {
     canHandle(handlerInput){
         return Alexa.getRequestType(handlerInput.requestEnvelope)==='IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope)==='FraseIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope)==='FraseIntent';//intent que criei
     },
     handle(handlerInput){
         const speakOutput= "nao sabemos possivel foi la e fez";
@@ -159,6 +159,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         LaunchRequestHandler,
         HelloWorldIntentHandler,
         HelpIntentHandler,
+        FraseIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
         SessionEndedRequestHandler,
