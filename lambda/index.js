@@ -43,14 +43,17 @@ const HelloWorldIntentHandler = {
 
 const CardCreateIntent = {//funçao para criar cartao
   canHandle(handlerInput) {
+      nome = handler_input.request_envelope.request.intent.slots['nomecard'].value
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'CardCreateIntent';
     },
    async handle(handlerInput) {
         //const speakOutput = 'foi';
-         nome = handler_input.request_envelope.request.intent.slots['nomecard'].value
+       
+       
+       
          var speakOutput = axios.post('https://api.trello.com/1/cards?idList=6414eaacdf357282aee076b8&name=teste&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B');
-            speakOutput = name; 
+        speakOutput = name; 
         return handlerInput.responseBuilder
             .speak(speakOutput)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
