@@ -48,7 +48,7 @@ const CardCreateIntent = {//funçao para criar cartao
     },
    async handle(handlerInput) {
         //const speakOutput = 'foi';
-        var nome = handlerInput.request_envelope.request.intent.slots['nomecard'].value//pega a variavel nomecard
+        const nome = handlerInput.request_envelope.request.intent.slots['nomecard'].value//pega a variavel nomecard
         var speakOutput = axios.post('https://api.trello.com/1/cards?idList=6414eaacdf357282aee076b8&name=teste&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B');
         speakOutput = nome; 
         return handlerInput.responseBuilder
