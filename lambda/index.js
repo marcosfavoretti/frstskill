@@ -41,10 +41,10 @@ const HelloWorldIntentHandler = {
     }
 };
 
-const FraseIntentHandler = {
+const CardCreateIntent = {
   canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'FraseIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'CardCreateIntent';
     },
    async handle(handlerInput) {
         //const speakOutput = 'foi';
@@ -170,7 +170,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         LaunchRequestHandler,
         HelloWorldIntentHandler,
         HelpIntentHandler,
-        FraseIntentHandler,
+        CardCreateIntent,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
         SessionEndedRequestHandler,
