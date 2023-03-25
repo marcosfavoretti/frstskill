@@ -10,14 +10,14 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
+        const speakOutput = 'funcionou';
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
+            .speak(speakOutput)//o que ela fala
+            .reprompt(speakOutput)//esperando resposta fala
             .getResponse();
     }
-};
+};//respota do da alexa
 
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
@@ -34,6 +34,19 @@ const HelloWorldIntentHandler = {
     }
 };
 
+const FraseIntentHandler = {
+    canHandle(handlerInput){
+        return Alexa.getRequestType(handlerInput.requestEnvelope)==='IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope)==='FraseIntent';
+    },
+    handle(handlerInput){
+        const speakOutput= "nao sabemos possivel foi la e fez";
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            //.reprompt() nao finaliza o serviço para nao precisar chamar novamente
+            .getResponse();
+    }
+}
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
