@@ -41,6 +41,22 @@ const HelloWorldIntentHandler = {
     }
 };
 
+const GerenciaIntent = {//funçao que ve os dias de vencimento dos cards
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
+    },
+    async handle(handlerInput) {
+
+        
+
+        return handlerInput.responseBuilder
+            .speak('ola mundo')
+            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .getResponse();
+    }
+};
+
 const CardCreateIntent = {//funçao para criar cartao
   canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -67,9 +83,9 @@ for (var i in temp) {
         str += '-'
     }
 }
-    due = str //passo minha var temp que ta o string de data para minha var geral de data
+//str minha variavel com o dia certo em string 
+//tive que fazer isso pq ele sempre esta subtraindo um dia da minha data quando eu nao tratava
 }
-console.log("->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+ due)//saber como vai ser mandado a data na alexa
 axios.get(encodeURI('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B'))//req para pegar as lists
     .then(response => {
         const obj = JSON.parse(JSON.stringify(response.data))//json parse => obj recebe json
@@ -77,11 +93,11 @@ axios.get(encodeURI('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/li
 
             if (obj[i].name.toLowerCase() === nomelist) {//pegar o valor de todas as listas do quadro
                 //ve se tem a lista com o nome passado se tiver vai adicionar o cartao na lista passada
-                axios.post(encodeURI('https://api.trello.com/1/cards?idList=' + obj[i].id + '&name=' + nome +'&due='+due+'&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B'));
+                axios.post(encodeURI('https://api.trello.com/1/cards?idList=' + obj[i].id + '&name=' + nome +'&due='+str+'&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B'));
                 break//sai do for 
             }
             else if (nomelist === undefined && nome !== undefined ) {//se nao passar nenhuma lista ele vai colocar na primeira lista e sair do for
-                axios.post( encodeURI('https://api.trello.com/1/cards?idList=' + obj[i].id + '&name=' + nome + '&due='+due+'&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B'));
+                axios.post( encodeURI('https://api.trello.com/1/cards?idList=' + obj[i].id + '&name=' + nome + '&due='+str+'&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B'));
                 break
             }
         }
@@ -208,6 +224,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         HelloWorldIntentHandler,
         HelpIntentHandler,
         CardCreateIntent,
+        GerenciaIntent,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
         SessionEndedRequestHandler,
