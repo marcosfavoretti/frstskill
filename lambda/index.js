@@ -48,13 +48,44 @@ const GerenciaIntent = {//funçao que ve os dias de vencimento dos cards
     },
     async handle(handlerInput) {
         
-        
+    //
+    let List = [];//vai armazenar as que que tiverem no range de 5 dias
 
+var dataT = new Date();
+var diastr = dataT.getFullYear().toString() + '-' +
+    (dataT.getMonth() + 1).toString().padStart(2, '0') + '-' +
+    dataT.getDate().toString().padStart(2, '0');
+
+var dias = handlerInput.requestEnvelope.request.intent.slots['dias'].value
+var data = new Date(diastr)//dia de hoje 
+
+axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?cards=open&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B')//req para pegar as lists
+    .then(response => {
+        const obj = JSON.parse(JSON.stringify(response.data))//json parse => obj recebe json
+        //console.log(obj)
+        for (var i in obj) {
+            var cardobj = obj[i].cards 
+            for (var j in cardobj) {
+                var datacard = new Date(cardobj[j].due)//dia do cartao
+                //console.log(typeof datacard)//pego a data de vencimento
+                var umDiaEmMilissegundos = 86400000; // número de milissegundos em um dia
+                var intervaloEmDias = dias; // número de dias no intervalo
+                if (Math.abs((datacard.getTime() - data.getTime()) / umDiaEmMilissegundos) <= intervaloEmDias) {
+                    
+                    List.push(cardobj[j].name)
+                    console.log(List)
+                    
+                }
+            }
+        }
+    })
+    .catch(err => console.error(err))
+    //
         return handlerInput.responseBuilder
             .speak('ola mundo')
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
-    }
+    }//return hadle
 };
 
 const CardCreateIntent = {//funçao para criar cartao
