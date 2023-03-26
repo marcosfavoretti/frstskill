@@ -55,8 +55,18 @@ if(due  === undefined){//trata o valor caso ele nao seja passado
     due = ""
 }
 else{
-    var temp = due.split('-')//divido para somar mais um na data pq se nao fica zoado no trello a data
-    due = (parseInt(temp[2])+1) //somo mais um no vetor onde esta a data
+var temp = due.split('-')
+temp[2] = parseInt(temp[2]) + 1//so mais um na variavel
+console.log(temp[2])
+var str = ''
+
+for (var i in temp) {
+    console.log(i)
+    str += temp[i]
+    if (i != 2) {
+        str += '-'
+    }
+}
 }
 console.log("->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+ due)//saber como vai ser mandado a data na alexa
 axios.get(encodeURI('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B'))//req para pegar as lists
