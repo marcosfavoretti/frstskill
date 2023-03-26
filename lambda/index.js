@@ -35,7 +35,7 @@ const HelloWorldIntentHandler = {
 
 
         return handlerInput.responseBuilder
-            .speak('ola mundo')
+            .speak('deu errado algo')
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
@@ -82,7 +82,7 @@ axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?cards=
     .catch(err => console.error(err))
     //
         return handlerInput.responseBuilder
-            .speak(List)
+            .speak(List[0])//aki so para testar coloquei um elemento so
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }//return hadle
