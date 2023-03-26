@@ -73,7 +73,7 @@ axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?cards=
                 if (Math.abs((datacard.getTime() - data.getTime()) / umDiaEmMilissegundos) <= intervaloEmDias) {
                     
                     List.push(cardobj[j].name)
-                    console.log(List)
+                    console.log('->>>>>>>>>>>>>>>>>>>>>>' + List)
                     
                 }
             }
