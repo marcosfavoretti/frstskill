@@ -132,12 +132,14 @@ axios.get(encodeURI('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/li
                 break
             }
         }
-    })
-    .catch(err => console.error(err))
-        return handlerInput.responseBuilder
+        //aki
+         return handlerInput.responseBuilder
             .speak('cartao '+ nome +' criado na lista' + nomelist + 'validade' + due)
             .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
+    })//try
+    .catch(err => console.error(err))
+       
     }
 };
 
