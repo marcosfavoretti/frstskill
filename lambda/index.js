@@ -80,7 +80,7 @@ axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?cards=
         }
             console.log('->>>>>>>>>>>>>>>>>>>>>>aaaaaaaaaaaaaaaaaaaaaaa' +List)
             return handlerInput.responseBuilder
-            .speak('nome')//aki so para testar coloquei um elemento so
+            .speak('nome' + List)//aki so para testar coloquei um elemento so
             .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     })//try
@@ -88,7 +88,7 @@ axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?cards=
     //
             console.log(List)
             return handlerInput.responseBuilder
-            .speak(err)//aki so para testar coloquei um elemento so
+            .speak('erro')//aki so para testar coloquei um elemento so
             .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }//return hadle
