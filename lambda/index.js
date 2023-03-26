@@ -88,7 +88,7 @@ axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?cards=
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     })//try
-    .catch(err => console.error('->>>>>>>>>>>>>>>dadawdasdwadadw>'+ err))
+    .catch(err => console.error( err))
     //
             console.log('erro' + List)
             return handlerInput.responseBuilder
