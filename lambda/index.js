@@ -44,7 +44,7 @@ const HelloWorldIntentHandler = {
 const GerenciaIntent = {//funçao que ve os dias de vencimento dos cards
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'GerenciaIntent';
     },
     async handle(handlerInput) {
 
