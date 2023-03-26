@@ -78,13 +78,14 @@ axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?cards=
                 }
             }
         }
-    })
-    .catch(err => console.error(err))
-    //
-        return handlerInput.responseBuilder
-            .speak('nome' + List[0].toString)//aki so para testar coloquei um elemento so
+           return handlerInput.responseBuilder
+            .speak('nome' +List)//aki so para testar coloquei um elemento so
             .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
+    })//try
+    .catch(err => console.error(err))
+    //
+     
     }//return hadle
 };
 
@@ -132,14 +133,12 @@ axios.get(encodeURI('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/li
                 break
             }
         }
-        //aki
-         return handlerInput.responseBuilder
+    })
+    .catch(err => console.error(err))
+        return handlerInput.responseBuilder
             .speak('cartao '+ nome +' criado na lista' + nomelist + 'validade' + due)
             .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
-    })//try
-    .catch(err => console.error(err))
-       
     }
 };
 
