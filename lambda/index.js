@@ -57,14 +57,14 @@ const GerenciaIntent = {//funçao que ve os dias de vencimento dos cards
     (dataT.getMonth() + 1).toString().padStart(2, '0') + '-' +
     dataT.getDate().toString().padStart(2, '0');
 
-    var dias = handlerInput.requestEnvelope.request.intent.slots['dias'].value//pega o filtro de dias
+    var dias = await handlerInput.requestEnvelope.request.intent.slots['dias'].value//pega o filtro de dias
     
-    if(dias === undefined ){
-        dias = 7 //se nao for passado os dias ele busca um range de 7 dias para vencerdabdhajwdbad
+    if(dias === undefined ){//se nao for passado os dias ele busca um range de 7 dias para vencer
+        dias = 7 
     }
     var data = new Date(diastr)//dia de hoje 
 
-axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?cards=open&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B')//req para pegar as lists
+    await axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?cards=open&key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B')//req para pegar as lists
     .then(response => {
         const obj = JSON.parse(JSON.stringify(response.data))//json parse => obj recebe json
         //console.log(obj)
