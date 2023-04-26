@@ -3,9 +3,7 @@
  * Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
  * session persistence, api calls, and more.
  * */
-//const fetch = require('node-fetch');//import do fetch
 const axios = require('axios');
-//const fetch = (...args) => fetchP.then(fn => fn(...args))
 const Alexa = require('ask-sdk-core');
 
 
@@ -107,6 +105,8 @@ const CardCreateIntent = {//funçao para criar cartao
 
 const nome = handlerInput.requestEnvelope.request.intent.slots['nomecard'].value;//nome do card
 const nomelist = handlerInput.requestEnvelope.request.intent.slots['nomelist'].value;//nome da list
+const nomelist = handlerInput.requestEnvelope.request.intent.slots['nomecardfull'].value;//nome do cartao caso 
+
 var due = handlerInput.requestEnvelope.request.intent.slots['dataVencimento'].value;//data vencimento
 if(due  === undefined){//trata o valor caso ele nao seja passado
     due = ""
