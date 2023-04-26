@@ -107,6 +107,7 @@ const CardCreateIntent = {//funçao para criar cartao
 
 const nome = handlerInput.requestEnvelope.request.intent.slots['nomecard'].value;//nome do card
 const nomelist = handlerInput.requestEnvelope.request.intent.slots['nomelist'].value;//nome da list
+console.log(nomelist)
 var due = handlerInput.requestEnvelope.request.intent.slots['dataVencimento'].value;//data vencimento
 if(due  === undefined){//trata o valor caso ele nao seja passado
     due = ""
