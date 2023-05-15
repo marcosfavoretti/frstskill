@@ -21,8 +21,42 @@ const LaunchRequestHandler = {
             .reprompt(speakOutput)//esperando resposta fala
             .getResponse();
     }
-};//respota do da alexa
+};//respota da alexa
 
+
+const updateIntent = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'UpdateIntent';
+    },
+    handle(handlerInput) {
+        const speakOutput = 'funcionou';
+         var cardName = handlerInput.requestEnvelope.request.intent.slots['nome'].value//pega o filtro de dias
+         var fieldName = handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
+         var newValue = handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
+    axios.get(encodeURI(url)) //colcoar um bloco try catch para tratar quando nao tem o cartao
+        .then((response) => {
+            //Adquire o ID do cartão que será atualizado
+            const obj = JSON.parse(JSON.stringify(response.data))
+            const target = obj.find(cartao => cartao.name === cardName);
+            cardID = target.id;
+
+            //Atualiza o cartão
+            urlCard = `https://api.trello.com/1/cards/${cardID}?key=${key}&token=${token}`;
+            parameter = alexaDictionary[fieldName] + '=' + newValue; //Note que estou usando o alexaDictionary para traduzir o input da Alexa
+            console.log(parameter);
+            axios.put(encodeURI(urlCard), parameter);
+        }).catch((err) => { //Manuseia erro caso não encontrado
+            console.log(`Error: ${err}`);
+        });
+        
+        return handlerInput.responseBuilder
+            .speak(speakOutput)//o que ela fala
+            .reprompt(speakOutput)//esperando resposta fala
+            .getResponse();
+    }
+
+}
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -255,6 +289,11 @@ const ErrorHandler = {
     }
 };
 
+const alexaDictionary = {
+    'nome': 'name',
+    'descrição': 'desc',
+    'validade': 'due'
+};
 /**
  * This handler acts as the entry point for your skill, routing all request and response
  * payloads to the handlers above. Make sure any new handlers or interceptors you've
@@ -263,6 +302,7 @@ const ErrorHandler = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
+        UpdateIntent
         HelloWorldIntentHandler,
         HelpIntentHandler,
         CardCreateIntent,
