@@ -35,6 +35,7 @@ const updateIntent = {
          var cardName = handlerInput.requestEnvelope.request.intent.slots['nome'].value//pega o filtro de dias
          var fieldName = handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
          var newValue = handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
+         
     axios.get(encodeURI(url)) //colcoar um bloco try catch para tratar quando nao tem o cartao
         .then((response) => {
             //Adquire o ID do cartão que será atualizado
