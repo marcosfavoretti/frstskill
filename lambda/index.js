@@ -31,6 +31,7 @@ const updateIntent = {
     },
     handle(handlerInput) {
         const speakOutput = 'funcionou';
+        
          var cardName = handlerInput.requestEnvelope.request.intent.slots['nome'].value//pega o filtro de dias
          var fieldName = handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
          var newValue = handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
