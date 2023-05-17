@@ -70,7 +70,7 @@ const updateIntent = {
 
             
         return handlerInput.responseBuilder
-            .speak("vars",cardName, fieldName, newValue)//o que ela fala
+            .speak(speakOutput)//o que ela fala
             .reprompt(speakOutput)//esperando resposta fala
             .getResponse();
     }
