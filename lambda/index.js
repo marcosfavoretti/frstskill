@@ -65,14 +65,14 @@ const UpdateIntent = {
             console.log(parameter);
             axios.put(encodeURI(urlCard), parameter);
                  
-             return handlerInput.responseBuilder
-            .speak(cardName, fieldName, newValue, cardID, boardID)//o que ela fala
-            //.reprompt(speakOutput)//esperando resposta fala
-            .getResponse();
+            
         }).catch((err) => { //Manuseia erro caso não encontrado
             console.log(`Error: ${err}`);
         });
-
+            return handlerInput.responseBuilder
+            .speak(cardName, fieldName, newValue, cardID, boardID)//o que ela fala
+            //.reprompt(speakOutput)//esperando resposta fala
+            .getResponse();
 
        
     }
