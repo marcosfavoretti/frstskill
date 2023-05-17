@@ -30,7 +30,7 @@ const LaunchRequestHandler = {
 const updateIntent = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
-        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'updateIntent';
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'UpdateIntent';
     },
     async handle(handlerInput) {
         const speakOutput = 'funcionou';
@@ -71,7 +71,7 @@ const updateIntent = {
             
         return handlerInput.responseBuilder
             .speak(speakOutput)//o que ela fala
-            .reprompt(speakOutput)//esperando resposta fala
+            //.reprompt(speakOutput)//esperando resposta fala
             .getResponse();
     }
 }
