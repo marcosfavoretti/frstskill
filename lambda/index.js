@@ -56,8 +56,8 @@ const UpdateIntent = {
         .then((response) => {
             //Adquire o ID do cartão que será atualizado
             const obj = JSON.parse(JSON.stringify(response.data))
-            const target = obj.find(cartao => cartao.name === cardName);
-            cardID = target.id;
+            const target = obj.find((cartao) => cartao.name === cardName);
+            cardID = target[0].id;
 
             //Atualiza o cartão
             let urlCard = `https://api.trello.com/1/cards/${cardID}?key=${key}&token=${token}`;
