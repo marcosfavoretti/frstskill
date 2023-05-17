@@ -27,9 +27,9 @@ const LaunchRequestHandler = {
 };//respota da alexa
 
 
-const updateIntent = {
+const UpdateIntent = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
         && Alexa.getIntentName(handlerInput.requestEnvelope) === 'UpdateIntent';
     },
     async handle(handlerInput) {
@@ -330,7 +330,7 @@ const alexaDictionary = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        updateIntent,
+        UpdateIntent,
         HelloWorldIntentHandler,
         HelpIntentHandler,
         CardCreateIntent,
