@@ -30,14 +30,14 @@ const LaunchRequestHandler = {
 const updateIntent = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
-        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'UpdateIntent';
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'updateIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         const speakOutput = 'funcionou';
         
-         var cardName = handlerInput.requestEnvelope.request.intent.slots['nome'].value//pega o filtro de dias
-         var fieldName = handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
-         var newValue = handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
+         var cardName =await handlerInput.requestEnvelope.request.intent.slots['nome'].value//pega o filtro de dias
+         var fieldName =await handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
+         var newValue =await handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
          console.log(cardName, fieldName, newValue)
          
          
