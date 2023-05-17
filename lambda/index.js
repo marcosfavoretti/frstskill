@@ -48,7 +48,8 @@ const UpdateIntent = {
         newValue = new Date(newValue);
     }
 
-    //URL para adquirir todos os cartões
+    let cardID
+        //URL para adquirir todos os cartões
     let url = `https://api.trello.com/1/boards/${boardID}/cards?key=${key}&token=${token}`;
 
     axios.get(encodeURI(url))
@@ -56,7 +57,7 @@ const UpdateIntent = {
             //Adquire o ID do cartão que será atualizado
             const obj = JSON.parse(JSON.stringify(response.data))
             const target = obj.find(cartao => cartao.name === cardName);
-            let cardID = target.id;
+            cardID = target.id;
 
             //Atualiza o cartão
             let urlCard = `https://api.trello.com/1/cards/${cardID}?key=${key}&token=${token}`;
@@ -70,7 +71,7 @@ const UpdateIntent = {
 
             
         return handlerInput.responseBuilder
-            .speak(cardName, fieldName, newValue)//o que ela fala
+            .speak(cardName, fieldName, newValue, cardID, boardID)//o que ela fala
             //.reprompt(speakOutput)//esperando resposta fala
             .getResponse();
     }
