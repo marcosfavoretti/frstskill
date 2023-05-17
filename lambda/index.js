@@ -39,6 +39,8 @@ const updateIntent = {
          var fieldName = handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
          var newValue = handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
          
+         
+         
         let isDate = CheckDate(newValue); //Verifica se o input é uma data
 
     //Caso for uma data, tratar conforme abaixo
@@ -68,7 +70,7 @@ const updateIntent = {
 
             
         return handlerInput.responseBuilder
-            .speak(speakOutput)//o que ela fala
+            .speak("vars",cardName, fieldName, newValue)//o que ela fala
             .reprompt(speakOutput)//esperando resposta fala
             .getResponse();
     }
