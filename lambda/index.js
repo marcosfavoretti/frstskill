@@ -328,7 +328,7 @@ const alexaDictionary = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        UpdateIntent,
+        updateIntent,
         HelloWorldIntentHandler,
         HelpIntentHandler,
         CardCreateIntent,
