@@ -8,6 +8,9 @@ const axios = require('axios');
 //const fetch = (...args) => fetchP.then(fn => fn(...args))
 const Alexa = require('ask-sdk-core');
 
+const boardID = '6414eaacdf357282aee076b1'
+const key ='17206af45468d8b12bd543f7f0bb3f86'
+const token ='ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B'
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -36,29 +39,50 @@ const updateIntent = {
          var fieldName = handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
          var newValue = handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
          
-    axios.get(encodeURI(url)) //colcoar um bloco try catch para tratar quando nao tem o cartao
+        let isDate = CheckDate(newValue); //Verifica se o input é uma data
+
+    //Caso for uma data, tratar conforme abaixo
+    if (isDate) {
+        newValue = new Date(newValue);
+    }
+
+    //URL para adquirir todos os cartões
+    let url = `https://api.trello.com/1/boards/${boardID}/cards?key=${key}&token=${token}`;
+
+    axios.get(encodeURI(url))
         .then((response) => {
             //Adquire o ID do cartão que será atualizado
             const obj = JSON.parse(JSON.stringify(response.data))
             const target = obj.find(cartao => cartao.name === cardName);
-            cardID = target.id;
+            let cardID = target.id;
 
             //Atualiza o cartão
-            urlCard = `https://api.trello.com/1/cards/${cardID}?key=${key}&token=${token}`;
-            parameter = alexaDictionary[fieldName] + '=' + newValue; //Note que estou usando o alexaDictionary para traduzir o input da Alexa
+            let urlCard = `https://api.trello.com/1/cards/${cardID}?key=${key}&token=${token}`;
+            let parameter = alexaDictionary[fieldName]+'='+newValue; //Note que estou usando o alexaDictionary para traduzir o input da Alexa
             console.log(parameter);
             axios.put(encodeURI(urlCard), parameter);
         }).catch((err) => { //Manuseia erro caso não encontrado
             console.log(`Error: ${err}`);
         });
-        
+
+
+            
         return handlerInput.responseBuilder
             .speak(speakOutput)//o que ela fala
             .reprompt(speakOutput)//esperando resposta fala
             .getResponse();
     }
-
 }
+
+
+function CheckDate(text) {
+    if (new Date(text) !== "Invalid Date") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -304,7 +328,7 @@ const alexaDictionary = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        UpdateIntent
+        UpdateIntent,
         HelloWorldIntentHandler,
         HelpIntentHandler,
         CardCreateIntent,
