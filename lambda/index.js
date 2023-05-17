@@ -62,9 +62,9 @@ const UpdateIntent = {
 
             //Atualiza o cartão
             let urlCard = `https://api.trello.com/1/cards/${cardID}?key=${key}&token=${token}`;
-            console.log(urlCard)
+           // console.log(urlCard)
             let parameter = alexaDictionary[fieldName]+'='+newValue; //Note que estou usando o alexaDictionary para traduzir o input da Alexa
-            console.log(parameter);
+            console.log('-------------------->',urlCard,parameter);
             axios.put(encodeURI(urlCard), parameter);
                  
             
