@@ -38,6 +38,7 @@ const UpdateIntent = {
          var cardName =await handlerInput.requestEnvelope.request.intent.slots['nome'].value//pega o filtro de dias
          var fieldName =await handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
          var newValue =await handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
+         
          console.log(cardName, fieldName, newValue)
          
          
@@ -61,6 +62,7 @@ const UpdateIntent = {
 
             //Atualiza o cartão
             let urlCard = `https://api.trello.com/1/cards/${cardID}?key=${key}&token=${token}`;
+            console.log(urlCard)
             let parameter = alexaDictionary[fieldName]+'='+newValue; //Note que estou usando o alexaDictionary para traduzir o input da Alexa
             console.log(parameter);
             axios.put(encodeURI(urlCard), parameter);
@@ -69,6 +71,7 @@ const UpdateIntent = {
         }).catch((err) => { //Manuseia erro caso não encontrado
             console.log(`Error: ${err}`);
         });
+            
             return handlerInput.responseBuilder
             .speak(cardName, fieldName, newValue, cardID, boardID)//o que ela fala
             //.reprompt(speakOutput)//esperando resposta fala
