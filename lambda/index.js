@@ -83,6 +83,7 @@ const UpdateIntent = {
 
 
 function CheckDate(text) {
+    console.log('check date called')
     if (new Date(text) !== "Invalid Date") {
         return true;
     } else {
