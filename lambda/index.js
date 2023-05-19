@@ -59,7 +59,7 @@ const UpdateIntent = {
             //const obj = JSON.parse(JSON.stringify(response.data))
             const obj = response.data
             const target = obj.find((cartao) => cartao.name === cardName);
-            cosole.log('--------.> target', target)
+            console.log('--------.> target', target)
             cardID = target.id;
 
             //Atualiza o cartão
