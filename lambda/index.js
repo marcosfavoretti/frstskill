@@ -56,8 +56,10 @@ const UpdateIntent = {
     axios.get(encodeURI(url))
         .then((response) => {
             //Adquire o ID do cartão que será atualizado
-            const obj = JSON.parse(JSON.stringify(response.data))
+            //const obj = JSON.parse(JSON.stringify(response.data))
+            const obj = response.data
             const target = obj.find((cartao) => cartao.name === cardName);
+            cosole.log('--------.> target', target)
             cardID = target.id;
 
             //Atualiza o cartão
