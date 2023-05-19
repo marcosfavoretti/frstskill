@@ -97,6 +97,7 @@ const UpdateIntent = {
 function CheckDate(text) {
     console.log('check date called')
     if (new Date(text) !== "Invalid Date") {
+        console.log('possivel virar data')
         return true;
     } else {
         return false;
