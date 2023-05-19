@@ -61,16 +61,15 @@ const UpdateIntent = {
             console.log(response)
             console.log('comparaçao', cardName, obj)
             //const target = obj.filter((cartao) => cartao.name === cardName)
-            let target = ''
+            let target
              for (let i = 0; i < response.data.length; i++) {
                 console.log(response.data[i].name)
                 if (response.data[i].name === cardName) {
-                    console.log('achou o nome correto')
                     target = response.data[i]
-                    break
+                    console.log('--------.> target', target)
+
                 }
             }
-            console.log('--------.> target', target)
             cardID = target.id;
 
             //Atualiza o cartão
