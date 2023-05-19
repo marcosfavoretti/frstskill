@@ -49,7 +49,7 @@ const UpdateIntent = {
         newValue = new Date(newValue);
     }
 
-    let cardID
+    let cardID = ''
         //URL para adquirir todos os cartões
     let url = `https://api.trello.com/1/boards/${boardID}/cards?key=${key}&token=${token}`;
     console.log(url)
@@ -65,10 +65,10 @@ const UpdateIntent = {
                 console.log(response.data[i].name, cardName)
                 if (response.data[i].name === cardName) {
                     let target = response.data[i]
-
+                    cardID = target.id;
                 }
             }
-            //cardID = target.id;
+            
 
             //Atualiza o cartão
             let urlCard = `https://api.trello.com/1/cards/${cardID}?key=${key}&token=${token}`;
