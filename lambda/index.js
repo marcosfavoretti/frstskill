@@ -42,12 +42,10 @@ const UpdateIntent = {
          let newValue =await handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
          
         // console.log(cardName, fieldName, newValue)
+         console.log(CheckDate(newValue))
          
-         
-        let isDate = CheckDate(newValue); //Verifica se o input é uma data
-
     //Caso for uma data, tratar conforme abaixo
-    if (isDate) {
+    if (CheckDate(newValue)) {
         newValue = new Date(newValue);
     }
 
@@ -95,13 +93,8 @@ const UpdateIntent = {
 
 
 function CheckDate(text) {
-    console.log('check date called')
-    if (new Date(text) !== "Invalid Date") {
-        console.log('possivel virar data')
-        return true;
-    } else {
-        return false;
-    }
+  const date = new Date(text)
+  return !isNaN(date.getTime());
 }
 
 const HelloWorldIntentHandler = {
