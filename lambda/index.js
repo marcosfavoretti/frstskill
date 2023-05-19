@@ -59,10 +59,10 @@ const UpdateIntent = {
             //const obj = JSON.parse(JSON.stringify(response.data))
             const obj = response.data
             console.log(response)
-            console.log('comparaçao', cardName, obj)
+            
             //const target = obj.filter((cartao) => cartao.name === cardName)
              for (let i = 0; i < response.data.length; i++) {
-                console.log(response.data[i].name)
+                console.log(response.data[i].name, cardName)
                 if (response.data[i].name === cardName) {
                     let target = response.data[i]
                     console.log('--------.> target', target)
