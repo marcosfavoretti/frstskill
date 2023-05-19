@@ -39,7 +39,7 @@ const UpdateIntent = {
         
          const fieldName =await handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
         
-         const newValue =await handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
+         let newValue =await handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
          
         // console.log(cardName, fieldName, newValue)
          
