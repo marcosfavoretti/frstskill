@@ -60,7 +60,9 @@ const UpdateIntent = {
             const obj = response.data
             console.log(response)
             console.log('comparaçao', cardName, obj)
-            const target = obj.find((cartao) => cartao.name === cardName);
+            //const target = obj.filter((cartao) => cartao.name === cardName);
+            const target = Object.values(obj).filter((cartao) => cartao.name === cardName);
+            
             console.log('--------.> target', target)
             cardID = target.id;
 
