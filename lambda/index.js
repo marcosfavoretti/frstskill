@@ -60,9 +60,11 @@ const UpdateIntent = {
             const obj = response.data
             console.log(response)
             console.log('comparaçao', cardName, obj)
-            //const target = obj.filter((cartao) => cartao.name === cardName);
-            const target = Object.values(obj).filter((cartao) => cartao.name === cardName);
-            
+            //const target = obj.filter((cartao) => cartao.name === cardName)
+           // const target = Object.values(obj).filter((cartao) => cartao.name === cardName);
+            const target = obj.filter((item) => {
+      return item.arrayProp.filter((cartao) => cartao.name === cardName).length > 0;
+    });
             console.log('--------.> target', target)
             cardID = target.id;
 
