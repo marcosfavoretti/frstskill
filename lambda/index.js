@@ -65,7 +65,6 @@ const UpdateIntent = {
                 console.log(response.data[i].name, cardName)
                 if (response.data[i].name === cardName) {
                     let target = response.data[i]
-                    console.log('--------.> target', target)
 
                 }
             }
