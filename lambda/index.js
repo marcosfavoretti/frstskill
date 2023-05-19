@@ -58,6 +58,7 @@ const UpdateIntent = {
             //Adquire o ID do cartão que será atualizado
             //const obj = JSON.parse(JSON.stringify(response.data))
             const obj = response.data
+            console.log(response)
             console.log('comparaçao', cardName, obj)
             const target = obj.find((cartao) => cartao.name === cardName);
             console.log('--------.> target', target)
