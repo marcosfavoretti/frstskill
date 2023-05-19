@@ -63,8 +63,9 @@ const UpdateIntent = {
             //const target = obj.filter((cartao) => cartao.name === cardName)
             let target
              for (let i = 0; i < response.data.length; i++) {
+                                     console.log(response.data[i].name)
                 if (response.data[i].name === cardName) {
-                    target = cardName
+                    target = response.data[i]
                     break
                 }
             }
