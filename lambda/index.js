@@ -52,7 +52,7 @@ const UpdateIntent = {
     let cardID
         //URL para adquirir todos os cartões
     let url = `https://api.trello.com/1/boards/${boardID}/cards?key=${key}&token=${token}`;
-
+    console.log(url)
     axios.get(encodeURI(url))
         .then((response) => {
             //Adquire o ID do cartão que será atualizado
