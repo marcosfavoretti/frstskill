@@ -62,8 +62,8 @@ const UpdateIntent = {
             console.log('comparaçao', cardName, obj)
             //const target = obj.filter((cartao) => cartao.name === cardName)
             let target
-            for (let i in obj){
-                if(i.name === cardName){
+             for (let i = 0; i < response.data.length; i++) {
+                if (response.data[i].name === cardName) {
                     target = cardName
                     break
                 }
