@@ -61,16 +61,15 @@ const UpdateIntent = {
             console.log(response)
             console.log('comparaçao', cardName, obj)
             //const target = obj.filter((cartao) => cartao.name === cardName)
-            let target
              for (let i = 0; i < response.data.length; i++) {
                 console.log(response.data[i].name)
                 if (response.data[i].name === cardName) {
-                    target = response.data[i]
+                    let target = response.data[i]
                     console.log('--------.> target', target)
 
                 }
             }
-            cardID = target.id;
+            //cardID = target.id;
 
             //Atualiza o cartão
             let urlCard = `https://api.trello.com/1/cards/${cardID}?key=${key}&token=${token}`;
