@@ -58,7 +58,7 @@ const UpdateIntent = {
             //Adquire o ID do cartão que será atualizado
             //const obj = JSON.parse(JSON.stringify(response.data))
             const obj = response.data
-            console.log(response)
+            console.log('---------------------------------------------->', cardName)
             
             //const target = obj.filter((cartao) => cartao.name === cardName)
              for (let i = 0; i < response.data.length; i++) {
