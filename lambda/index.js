@@ -35,11 +35,13 @@ const UpdateIntent = {
     async handle(handlerInput) {
         const speakOutput = 'funcionou';
         
-         let cardName = await handlerInput.requestEnvelope.request.intent.slots['nome'].value//pega o filtro de dias
-         let fieldName =await handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
-         let newValue =await handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
+         const cardName = await handlerInput.requestEnvelope.request.intent.slots['nome'].value//pega o filtro de dias
+        
+         const fieldName =await handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
+        
+         const newValue =await handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
          
-         console.log(cardName, fieldName, newValue)
+        // console.log(cardName, fieldName, newValue)
          
          
         let isDate = CheckDate(newValue); //Verifica se o input é uma data
