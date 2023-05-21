@@ -159,7 +159,7 @@ axios.get('https://api.trello.com/1/boards/6414eaacdf357282aee076b1/lists?cards=
         }
             return handlerInput.responseBuilder
             .speak('Os cartoes próximos ao vencimento são:' + List)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     })//try
     .catch(err => console.error( err))
@@ -332,7 +332,7 @@ const ErrorHandler = {
 const alexaDictionary = {
     'nome': 'name',
     'descrição': 'desc',
-    'validade': 'due'
+    'vencimento': 'due'
 };
 /**
  * This handler acts as the entry point for your skill, routing all request and response
