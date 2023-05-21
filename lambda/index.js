@@ -26,6 +26,48 @@ const LaunchRequestHandler = {
     }
 };//respota da alexa
 
+const MarkersIntent = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'MarkersIntent';
+    },
+    async handle(handlerInput) {
+        const cardName = await handlerInput.requestEnvelope.request.intent.slots['nomecard'].value//pega o filtro de dias
+        
+        const type =await handlerInput.requestEnvelope.request.intent.slots['type'].value//pega o filtro de dias
+    
+        if(type === undefined){
+            let url = `https://api.trello.com/1/boards/${boardID}/cards?key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B`
+            //console.log(url)
+            let resp = await axios.get(url)
+
+            if (resp) {
+        //console.log(resp.data)
+        //let card = resp.data.filter((resp) => nomecard === resp.name)
+             for( let i in resp.data){
+                if(resp.data[i].name === cardName){
+                let id = resp.data[i].id
+                console.log(resp.data[i].name, resp.data[i].id )
+                axios.put(`https://api.trello.com/1/cards/${id}?&key=${key}&token=${token}`, {
+                    cover: {
+                        color: 'purple'
+                    }
+                })
+        
+            }
+        }
+    }
+    else {
+        return false
+    }
+        }
+        else{
+            //setar a importancia do card
+        }
+        
+    }
+}
+
 
 const UpdateIntent = {
     canHandle(handlerInput) {
