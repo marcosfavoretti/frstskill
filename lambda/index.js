@@ -64,6 +64,11 @@ const MarkersIntent = {
         else{
             //setar a importancia do card
         }
+        return handlerInput.responseBuilder
+            .speak('funcionou')//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
+
         
     }
 }
