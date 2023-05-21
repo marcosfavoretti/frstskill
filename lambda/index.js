@@ -92,7 +92,7 @@ async function generateList(){//faço a lista de tarefas
 const ReuniaoTopicsIntent = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'MarkersIntent';
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ReuniaoTopicsIntent';
     },
     async handle(handlerInput) {
     await generateList()
