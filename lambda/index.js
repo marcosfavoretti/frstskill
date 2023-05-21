@@ -7,7 +7,7 @@
 const axios = require('axios');
 //const fetch = (...args) => fetchP.then(fn => fn(...args))
 const Alexa = require('ask-sdk-core');
-
+let list_reuniao = []
 const boardID = '6414eaacdf357282aee076b1'
 const key ='17206af45468d8b12bd543f7f0bb3f86'
 const token ='ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B'
@@ -50,7 +50,7 @@ const MarkersIntent = {
                 console.log(resp.data[i].name, resp.data[i].id )
                 axios.put(`https://api.trello.com/1/cards/${id}?&key=${key}&token=${token}`, {
                     cover: {
-                        color: 'purple'
+                        color: 'green'
                     }
                 })
         
@@ -67,7 +67,50 @@ const MarkersIntent = {
         
     }
 }
+async function generateList(){//faço a lista de tarefas
+    let url = `https://api.trello.com/1/boards/${boardID}/cards?key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B`
+    console.log(url)
+    let resp = await axios.get(url)
 
+    if (resp) {
+        //console.log(resp.data)
+        //let card = resp.data.filter((resp) => nomecard === resp.name)
+        for( let i in resp.data){
+            if(resp.data[i].cover.color === 'purple'){
+                let id = resp.data[i].id
+                list_reuniao.push({nome: resp.data[i].name, desc: resp.data[i].desc, due: resp.data[i].due, id: resp.data[i].id}) //adiciono o card no meu array
+                //console.log(resp.data[i].name, resp.data[i].id )
+        
+            }
+        }
+    }
+    else {
+        return false
+    }
+    //console.log('->',list)
+}
+const ReuniaoTopicsIntent = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'MarkersIntent';
+    },
+    async handle(handlerInput) {
+    await generateList()
+    let speak = list_reuniao[0]
+    console.log(speak)
+    axios.put(`https://api.trello.com/1/cards/${speak.id}?&key=${key}&token=${token}`, {
+        cover: {
+            color: 'lime'
+        }
+    })
+    return handlerInput.responseBuilder
+            .speak(speak)//o que ela fala
+            .reprompt('chame denovo essa func para ir para o proximos topicos. QTD de topicos', list_reuniao.length)//esperando resposta fala
+            .getResponse();
+
+    }
+    
+}
 
 const UpdateIntent = {
     canHandle(handlerInput) {
@@ -385,6 +428,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         UpdateIntent,
+        MarkersIntent,
         HelloWorldIntentHandler,
         HelpIntentHandler,
         CardCreateIntent,
