@@ -94,6 +94,8 @@ async function generateList(){//faço a lista de tarefas
     }
     //console.log('->',list)
 }
+
+
 const ReuniaoTopicsIntent = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -102,7 +104,7 @@ const ReuniaoTopicsIntent = {
     async handle(handlerInput) {
     await generateList()
     let speak = list_reuniao[0]
-    console.log(speak)
+    //console.log(speak)
     axios.put(`https://api.trello.com/1/cards/${speak.id}?&key=${key}&token=${token}`, {
         cover: {
             color: 'lime'
@@ -110,7 +112,7 @@ const ReuniaoTopicsIntent = {
     })
     return handlerInput.responseBuilder
             .speak(speak)//o que ela fala
-            .reprompt('chame denovo essa func para ir para o proximos topicos. QTD de topicos', list_reuniao.length)//esperando resposta fala
+            .reprompt()//esperando resposta fala
             .getResponse();
 
     }
