@@ -113,7 +113,7 @@ const ReuniaoTopicsIntent = {
     list_reuniao.shift()
     console.log(speak)
     return handlerInput.responseBuilder
-            .speak(speak.nome, speak.desc)//o que ela fala
+            .speak(speak.nome +  'descriçao' + speak.desc)//o que ela fala
             .reprompt()//esperando resposta fala
             .getResponse();
 
