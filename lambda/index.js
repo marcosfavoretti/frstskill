@@ -110,6 +110,7 @@ const ReuniaoTopicsIntent = {
             color: 'lime'
         }
     })
+    list_reuniao.shift()
     return handlerInput.responseBuilder
             .speak(speak)//o que ela fala
             .reprompt()//esperando resposta fala
