@@ -81,7 +81,7 @@ async function generateList(){//faço a lista de tarefas
         //console.log(resp.data)
         //let card = resp.data.filter((resp) => nomecard === resp.name)
         for( let i in resp.data){
-            if(resp.data[i].cover.color === 'purple'){
+            if(resp.data[i].cover.color === 'green'){
                 let id = resp.data[i].id
                 list_reuniao.push({nome: resp.data[i].name, desc: resp.data[i].desc, due: resp.data[i].due, id: resp.data[i].id}) //adiciono o card no meu array
                 //console.log(resp.data[i].name, resp.data[i].id )
