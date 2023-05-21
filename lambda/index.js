@@ -83,9 +83,19 @@ async function generateList(){//faço a lista de tarefas
         for( let i in resp.data){
             if(resp.data[i].cover.color === 'green'){
                 let id = resp.data[i].id
-                list_reuniao.push({nome: resp.data[i].name, desc: resp.data[i].desc, due: resp.data[i].due, id: resp.data[i].id}) //adiciono o card no meu array
+                let unic = true
+                for( i in list_reuniao){
+                    if(i.nome === resp.data[i].name){ //se ja tiver na lista
+                            unic = false
+                            
+                        }
+                }
                 //console.log(resp.data[i].name, resp.data[i].id )
-        
+                if(unic){
+                                    list_reuniao.push({nome: resp.data[i].name, desc: resp.data[i].desc, due: resp.data[i].due, id: resp.data[i].id}) //adiciono o card no meu array
+
+                }
+
             }
         }
     }
