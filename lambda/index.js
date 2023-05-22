@@ -166,7 +166,10 @@ const DeleteCardIntent = {
                 
                 }).catch(error => {
                   console.log('Erro ao deletar o card: ', error);
-                  return
+                   return handlerInput.responseBuilder
+                .speak('error')//o que ela fala
+                .reprompt()//esperando resposta fala
+                .getResponse();
                 });
             
         }
