@@ -92,6 +92,7 @@ async function generateList(){//faço a lista de tarefas
                 }
                 console.log('---------------<'+ resp.data[i].name + unic )
                 if(unic){
+                    console.log(resp.data[i].name)
                     list_reuniao.push({nome: resp.data[i].name, desc: resp.data[i].desc, due: resp.data[i].due, id: resp.data[i].id}) //adiciono o card no meu array
                 }
 
