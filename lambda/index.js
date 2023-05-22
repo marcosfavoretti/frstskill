@@ -120,7 +120,7 @@ const ReuniaoTopicsIntent = {
             color: 'lime'
         }
     })
-    console.log('-----------o que foi removido'+list_reuniao.shift()) //remove o primeiro elemento
+   list_reuniao.splice(0,1) //remove o primeiro elemento
     
     console.log(speak)
     return handlerInput.responseBuilder
