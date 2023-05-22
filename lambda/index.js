@@ -482,6 +482,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         UpdateIntent,
+        CreateListIntent,
         ReuniaoTopicsIntent,
         MarkersIntent,
         HelloWorldIntentHandler,
