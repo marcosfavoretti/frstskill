@@ -105,7 +105,40 @@ async function generateList(){//faço a lista de tarefas
     }
     //console.log('->',list)
 }
+const CreateListIntent = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'CreateListIntent';
+    },
+    async handle(handlerInput) {
+           
+           const listname = await handlerInput.requestEnvelope.request.intent.slots['nomeLista'].value//pega o filtro de dias
+           let pos = await handlerInput.requestEnvelope.request.intent.slots['pos'].value//pega o filtro de dias
+            
+            if(pos ===undefined){
+                pos = 0;//se for undefined crai no primeiro lugar
+            }
+                
+           let urlCreateList = 'https://api.trello.com/1/lists?name=' + encodeURIComponent(listname) + `pos=${pos}&idBoard=${boardID}&`+`key=${key}&token${token}`
 
+            axios.post(urlCreateList).then(response => {
+                console.log('Lista criada com sucesso: ', response.data)
+              }).catch(error => {
+                console.log(error)
+                return handlerInput.responseBuilder
+            .speak('nao foi possivel criar a lista')//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
+              });
+
+           
+            return handlerInput.responseBuilder
+            .speak('lista ', listname, 'criado com sucesso')//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
+    }
+    
+}
 
 const ReuniaoTopicsIntent = {
     canHandle(handlerInput) {
