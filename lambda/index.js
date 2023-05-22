@@ -119,8 +119,7 @@ const CreateListIntent = {
                 pos = 0;//se for undefined crai no primeiro lugar
             }
                 
-           let urlCreateList = 'https://api.trello.com/1/lists?name=' + encodeURIComponent(listname) + `pos=${pos}&idBoard=${boardID}&`+`key=${key}&token${token}`
-
+            let urlCreateList = 'https://api.trello.com/1/lists?name=' + encodeURIComponent(listname) + `pos=${pos}&idBoard=${boardID}`+`&key=${key}&token=${token}`;
             axios.post(urlCreateList).then(response => {
                 console.log('Lista criada com sucesso: ', response.data)
               }).catch(error => {
