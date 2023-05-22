@@ -132,7 +132,7 @@ const CreateListIntent = {
 
            
             return handlerInput.responseBuilder
-            .speak('lista ', listname, 'criado com sucesso')//o que ela fala
+            .speak('lista ' + listname + 'criado com sucesso')//o que ela fala
             .reprompt()//esperando resposta fala
             .getResponse();
     }
