@@ -41,22 +41,25 @@ const MarkersIntent = {
             //console.log(url)
             let resp = await axios.get(url)
 
-            if (resp) {
-        //console.log(resp.data)
-        //let card = resp.data.filter((resp) => nomecard === resp.name)
-             for( let i in resp.data){
-                if(resp.data[i].name === cardName){
-                let id = resp.data[i].id
-                console.log(resp.data[i].name, resp.data[i].id )
-                axios.put(`https://api.trello.com/1/cards/${id}?&key=${key}&token=${token}`, {
-                    cover: {
-                        color: 'green'
-                    }
-                })
-        
-            }
+if (resp) {
+    //console.log(resp.data)
+    //let card = resp.data.filter((resp) => nomecard === resp.name)
+         for( let i in resp.data){
+            if(resp.data[i].name === cardName){
+
+                    console.log('achou o caras')
+                    let urlDeleteCard = 'https://api.trello.com/1/cards/' + resp.data[i].id + '?' + 'key='+key+'&token='+ token;
+                    axios.delete(urlDeleteCard).then(response => {
+                  console.log('Card deletado com sucesso: ', response.data);
+                }).catch(error => {
+                  console.log('Erro ao deletar o card: ', error);
+                  return
+                });
+            
         }
     }
+}
+
     else {
         return false
     }
@@ -149,36 +152,24 @@ const DeleteCardIntent = {
     
     const urlGetCards = `https://api.trello.com/1/boards/${boardID}/cards?&key=${key}&token${token}`
  
-          axios.get(urlGetCards).then(response => {
+    axios.get(urlGetCards).then(response => {
     // Encontra o card com o nome fornecido
-    let card = response.data.find(card => card.name === cardname);
-
-    if (card) {
-      // Se o card for encontrado, é deletado
-      let urlDeleteCard = 'https://api.trello.com/1/cards/' + card.id + '?' + 'key='+key+'&token='+ token;
-      axios.delete(urlDeleteCard).then(response => {
+    for(let cards in response.data){
+        if(cards.name === cardname){
+            let urlDeleteCard = 'https://api.trello.com/1/cards/' + cards.id + '?' + 'key='+key+'&token='+ token;
+            axios.delete(urlDeleteCard).then(response => {
           console.log('Card deletado com sucesso: ', response.data);
         }).catch(error => {
           console.log('Erro ao deletar o card: ', error);
           return
         });
-    } else {
-      console.log('Card não encontrado');
-      return handlerInput.responseBuilder
-            .speak('cartao nao encontrado')//o que ela fala
-            .reprompt()//esperando resposta fala
-            .getResponse();
-    }
-  }).catch(error => {
-    console.log('Erro ao buscar cards: ', error);
-  });
-            return handlerInput.responseBuilder
-            .speak('Cartao ' + cardname + 'deletado com sucesso')//o que ela fala
-            .reprompt()//esperando resposta fala
-            .getResponse();
-    }
     
+        }//tratarei com o break para so remover o primerio que ele achar com o nome
+    }
+    })
+    }
 }
+      // Se o card for encontrado, é deletado
 
 const ReuniaoTopicsIntent = {
     canHandle(handlerInput) {
