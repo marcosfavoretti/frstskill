@@ -145,7 +145,7 @@ const DeleteCardIntent = {
         && Alexa.getIntentName(handlerInput.requestEnvelope) === 'DeleteCardIntent';
     },
     async handle(handlerInput) {
-           const cardname = await handlerInput.requestEnvelope.request.intent.slots['nomecard'].value
+    const cardname = await handlerInput.requestEnvelope.request.intent.slots['nomecard'].value
     
     const urlGetCards = `https://api.trello.com/1/boards/${boardID}/cards?&key=${key}&token${token}`
  
