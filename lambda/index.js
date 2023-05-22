@@ -146,7 +146,32 @@ const DeleteCardIntent = {
     },
     async handle(handlerInput) {
            const cardname = await handlerInput.requestEnvelope.request.intent.slots['nomecard'].value
-          
+    
+    const urlGetCards = `https://api.trello.com/1/boards/${boardID}/cards?&key=${key}&token${token}`
+ 
+          axios.get(urlGetCards).then(response => {
+    // Encontra o card com o nome fornecido
+    let card = response.data.find(card => card.name === cardname);
+
+    if (card) {
+      // Se o card for encontrado, é deletado
+      let urlDeleteCard = 'https://api.trello.com/1/cards/' + card.id + '?' + 'key='+key+'&token='+ token;
+      axios.delete(urlDeleteCard).then(response => {
+          console.log('Card deletado com sucesso: ', response.data);
+        }).catch(error => {
+          console.log('Erro ao deletar o card: ', error);
+          return
+        });
+    } else {
+      console.log('Card não encontrado');
+      return handlerInput.responseBuilder
+            .speak('cartao nao encontrado')//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
+    }
+  }).catch(error => {
+    console.log('Erro ao buscar cards: ', error);
+  });
             return handlerInput.responseBuilder
             .speak('Cartao ' + cardname + 'deletado com sucesso')//o que ela fala
             .reprompt()//esperando resposta fala
