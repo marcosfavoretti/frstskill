@@ -159,7 +159,7 @@ const DeleteCardIntent = {
                 axios.delete(urlDeleteCard).then(response => {
                 console.log('Card deletado com sucesso: ', response.data);
                 return handlerInput.responseBuilder
-                .speak('card '+resp.data[i].name +' deltado')//o que ela fala
+                .speak('card '+resp.data[i].name +' deletado')//o que ela fala
                 .reprompt()//esperando resposta fala
                 .getResponse();
 
@@ -175,6 +175,7 @@ const DeleteCardIntent = {
         }
     }
 }
+
     })
      return handlerInput.responseBuilder
                 .speak('card nao achado')//o que ela fala
