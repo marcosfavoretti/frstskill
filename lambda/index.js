@@ -139,6 +139,22 @@ const CreateListIntent = {
     
 }
 
+const DeleteCardIntent = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'DeleteCardIntent';
+    },
+    async handle(handlerInput) {
+           const cardname = await handlerInput.requestEnvelope.request.intent.slots['nomecard'].value
+          
+            return handlerInput.responseBuilder
+            .speak('Cartao ' + cardname + 'deletado com sucesso')//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
+    }
+    
+}
+
 const ReuniaoTopicsIntent = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -481,6 +497,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         UpdateIntent,
+        DeleteCardIntent,
         CreateListIntent,
         ReuniaoTopicsIntent,
         MarkersIntent,
