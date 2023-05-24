@@ -213,15 +213,19 @@ const ReuniaoTopicsIntent = {
 
 const UpdateIntent = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
         && Alexa.getIntentName(handlerInput.requestEnvelope) === 'UpdateIntent';
     },
     async handle(handlerInput) {
-        const speakOutput = 'funcionou';
+        return handlerInput.responseBuilder
+            .speak()//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
+       /* const speakOutput = 'funcionou';
         
-         const cardName = await handlerInput.requestEnvelope.request.intent.slots['nome'].value//pega o filtro de dias
+         let cardName = await handlerInput.requestEnvelope.request.intent.slots['nome'].value//pega o filtro de dias
         
-         const fieldName =await handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
+         let fieldName =await handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
         
          let newValue =await handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
          
@@ -271,7 +275,7 @@ const UpdateIntent = {
             .reprompt()//esperando resposta fala
             .getResponse();
 
-       
+       */
     }
 }
 
