@@ -518,7 +518,7 @@ const ErrorHandler = {
 const alexaDictionary = {
     'nome': 'name',
     'descrição': 'desc',
-    'vencimento': 'due'
+    'teste': 'due'
 };
 /**
  * This handler acts as the entry point for your skill, routing all request and response
