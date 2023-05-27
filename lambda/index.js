@@ -143,13 +143,58 @@ const MoveCardIntent = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
         && Alexa.getIntentName(handlerInput.requestEnvelope) === 'MoveCardIntent';
     },
-    
+        async handle(handlerInput) {
+
         const listname = await handlerInput.requestEnvelope.request.intent.slots['nomelist'].value
 
         const cardname = await handlerInput.requestEnvelope.request.intent.slots['card'].value
-    
-}
+        
+        
+        //Cartão que vai ser movido
+//Lista que vai receber o cartão
+let find = ''
+let findlist = ''
+const urlGetAllCardsOnBoard = `https://api.trello.com/1/boards/${boardID}/cards?key=${key}&token=${token}`
 
+axios.get(urlGetAllCardsOnBoard).then( (response) => {
+    //Achou o card que vai ser movido
+    //const card = response.data.find( c => c.name === cardToBeMoved )
+    for( let i in response.data){
+        if(response.data[i].name === cardname){
+            find = response.data[i]
+        }
+    }
+
+    //Se achar o card, agora vai procurar a lista
+    if(find !== ''){
+        axios.get(`https://api.trello.com/1/boards/${boardID}/lists?$key=${key}&token=${token}`).then(response => {
+            for( let i in response.data){
+                if(response.data[i].name === listname){
+                    findlist = response.data[i]
+                }
+            }
+        
+
+            //Se achar a lista, agora vai atualizar o card pra ficar na lista
+            if(findlist){
+                axios.put(encodeURI(`https://api.trello.com/1/cards/${find.id}?idList=${findlist.id}&pos=bottom&${aut}`))
+                console.log('Card movido com sucesso!')
+            }
+            else{
+                console.log('Não achou a lista')
+            }
+        }).catch(error =>{
+            console.log('Erro ao buscar a lista: ', error)
+        })
+    }else{
+        console.log('Não achou o card')
+    }
+}).catch( error => {
+    console.log('Erro ao buscar o card: ',error)
+})
+   
+}
+}
 const DeleteCardIntent = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
