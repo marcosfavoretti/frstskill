@@ -179,6 +179,10 @@ axios.get(urlGetAllCardsOnBoard).then( (response) => {
             if(findlist){
                 axios.put(encodeURI(`https://api.trello.com/1/cards/${find.id}?idList=${findlist.id}&pos=bottom&key=${key}token=${token}`))
                 console.log('Card movido com sucesso!')
+                 return handlerInput.responseBuilder
+            .speak('card movido com sucesso')//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
             }
             else{
                 console.log('Não achou a lista')
