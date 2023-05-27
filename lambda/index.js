@@ -161,6 +161,7 @@ axios.get(urlGetAllCardsOnBoard).then( (response) => {
     //const card = response.data.find( c => c.name === cardToBeMoved )
     for( let i in response.data){
         if(response.data[i].name === cardname){
+            console.log('aki achouuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
             find = response.data[i]
         }
     }
