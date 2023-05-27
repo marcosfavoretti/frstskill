@@ -152,14 +152,16 @@ const MoveCardIntent = {
         
         //Cartão que vai ser movido
 //Lista que vai receber o cartão
+
+const urlGetAllCardsOnBoard = `https://api.trello.com/1/boards/${boardID}/cards?key=${key}&token=${token}`
 let find = ''
 let findlist = ''
-const urlGetAllCardsOnBoard = `https://api.trello.com/1/boards/${boardID}/cards?key=${key}&token=${token}`
 
 await axios.get(urlGetAllCardsOnBoard).then( (response) => {
     //Achou o card que vai ser movido
     //const card = response.data.find( c => c.name === cardToBeMoved )
     for( let i in response.data){
+        console.log(response.data[i].name)
         if(response.data[i].name === cardname){
             console.log('aki achouuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
             find = response.data[i]
