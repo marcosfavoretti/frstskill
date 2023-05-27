@@ -25,6 +25,60 @@ const LaunchRequestHandler = {
             .getResponse();
     }
 };//respota da alexa
+const SignPersonIntent = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SignPersonIntent';
+    },
+    async handle(handlerInput) {
+        
+        const person = await handlerInput.requestEnvelope.request.intent.slots['Person'].value//pega o filtro de dias
+
+        const card = await handlerInput.requestEnvelope.request.intent.slots['card'].value//pega o filtro de dias
+
+        
+        
+    let cardUrl = `https://api.trello.com/1/boards/${boardID}/cards?key=${key}&token=${token}`;
+    let memberUrl = `https://api.trello.com/1/boards/${boardID}/members?key=${key}&token=${token}`;
+
+    axios.get(encodeURI(cardUrl)).then((cardResponse) => {
+        axios.get(encodeURI(memberUrl)).then((memberResponse) => {
+            //Adquire o ID do cartão que será atribuido
+            const cardsObj = JSON.parse(JSON.stringify(cardResponse.data))
+            let card = ''//filtro o cartao
+            for( let i  in cardsObj){
+                if(cardsObj[i].name === card){
+                    card = cardsObj[i]
+                }
+            }
+            //Adquire o ID do membro que será adicionado
+            const membersObj = JSON.parse(JSON.stringify(memberResponse.data));
+
+            //const member = membersObj.find(memberObj => memberObj.fullName === memberName);
+            let member = ''
+            for( let j in membersObj){
+                if(membersObj[j].fullName === person){
+                    member = membersObj[j]
+                }
+            }
+            console.log(card, member)
+            //Atualiza o cartão
+
+           
+                console.log(member.id)
+                let urlCard = `https://api.trello.com/1/cards/${card.id}/idMembers?key=${key}&token=${token}`;
+                axios.post(encodeURI(urlCard), { value: member.id });
+           
+            
+        }).catch((err) => { console.log(`Error: ${err}`); });
+    }).catch((err) => { console.log(`Error: ${err}`); });
+    
+    return handlerInput.responseBuilder
+            .speak('pessoa atribuida ao card')//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
+    }
+}
 
 const MarkersIntent = {
     canHandle(handlerInput) {
