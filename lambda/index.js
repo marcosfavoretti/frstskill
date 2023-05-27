@@ -151,9 +151,11 @@ const DeleteCardIntent = {
  
     axios.get(urlGetCards).then(resp => {
     if (resp) {
+        console.log('delete intent')
     //console.log(resp.data)
     //let card = resp.data.filter((resp) => nomecard === resp.name)
          for( let i in resp.data){
+            console.log(resp.data[i].name + cardname)
             if(resp.data[i].name === cardname){
                 let urlDeleteCard = encodeURI('https://api.trello.com/1/cards/' + resp.data[i].id + '?' + 'key='+key+'&token='+ token)
                 axios.delete(urlDeleteCard).then(response => {
