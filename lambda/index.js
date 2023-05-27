@@ -178,13 +178,13 @@ const DeleteCardIntent = {
         }
     }
 }
-
-    
-     return handlerInput.responseBuilder
-                .speak('card nao achado')//o que ela fala
+else{
+         console.log('sem resposta');
+                   return handlerInput.responseBuilder
+                .speak('error')//o que ela fala
                 .reprompt()//esperando resposta fala
-                .getResponse();
-
+                .getResponse(); 
+}
     }
 }
 
