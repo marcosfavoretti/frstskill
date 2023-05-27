@@ -185,16 +185,30 @@ axios.get(urlGetAllCardsOnBoard).then( (response) => {
             .getResponse();
             }
             else{
-                console.log('Não achou a lista')
+                return handlerInput.responseBuilder
+            .speak('nao foi possivel')//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
             }
         }).catch(error =>{
-            console.log('Erro ao buscar a lista: ', error)
+           return handlerInput.responseBuilder
+            .speak(error)//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
         })
     }else{
         console.log('Não achou o card')
+        return handlerInput.responseBuilder
+            .speak('card nao achado')//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
     }
 }).catch( error => {
     console.log('Erro ao buscar o card: ',error)
+    return handlerInput.responseBuilder
+            .speak(error)//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
 })
    
 }
