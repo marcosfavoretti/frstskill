@@ -196,7 +196,7 @@ await axios.get(urlGetAllCardsOnBoard).then( (response) => {
             .getResponse();
         })
     }else{
-        console.log('Não achou o card')
+        console.log('Não achou o card' + findlist+ find + listname+ cardname)
         return handlerInput.responseBuilder
             .speak('card nao achado')//o que ela fala
             .reprompt()//esperando resposta fala
