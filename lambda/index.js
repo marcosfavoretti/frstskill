@@ -185,12 +185,14 @@ axios.get(urlGetAllCardsOnBoard).then( (response) => {
             .getResponse();
             }
             else{
+                console.log('list error')
             return handlerInput.responseBuilder
             .speak('nao foi possivel')//o que ela fala
             .reprompt()//esperando resposta fala
             .getResponse();
             }
         }).catch(error =>{
+            console.log(error)
            return handlerInput.responseBuilder
             .speak(error)//o que ela fala
             .reprompt()//esperando resposta fala
