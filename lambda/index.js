@@ -657,6 +657,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         LaunchRequestHandler,
         UpdateIntent,
         MoveCardIntent,
+        SignPersonIntent,
         DeleteCardIntent,
         CreateListIntent,
         ReuniaoTopicsIntent,
