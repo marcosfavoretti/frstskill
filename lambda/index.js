@@ -147,7 +147,7 @@ const DeleteCardIntent = {
     async handle(handlerInput) {
     const cardname = await handlerInput.requestEnvelope.request.intent.slots['nomeCard'].value
     
-    const urlGetCards =encodeURI( `https://api.trello.com/1/boards/${boardID}/cards?&key=${key}&token${token}`)
+    const urlGetCards =encodeURI( `https://api.trello.com/1/boards/${boardID}/cards?&key=${key}&token=${token}`)
     console.log('----------------------->'+urlGetCards)
     let resp = await axios.get(urlGetCards)
     console.log('antes do resp')
