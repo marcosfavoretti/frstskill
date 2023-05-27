@@ -180,10 +180,6 @@ await axios.get(urlGetAllCardsOnBoard).then( (response) => {
             if(findlist !== ''){
                 axios.put(encodeURI(`https://api.trello.com/1/cards/${find.id}?idList=${findlist.id}&pos=bottom&key=${key}&token=${token}`))
                 console.log('Card movido com sucesso!')
-                 return handlerInput.responseBuilder
-            .speak('card movido com sucesso')//o que ela fala
-            .reprompt()//esperando resposta fala
-            .getResponse();
             }
             else{
                 console.log('list error')
@@ -213,6 +209,10 @@ await axios.get(urlGetAllCardsOnBoard).then( (response) => {
             .reprompt()//esperando resposta fala
             .getResponse();
 })
+return handlerInput.responseBuilder
+            .speak('card movido com sucesso')//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
    
 }
 }
