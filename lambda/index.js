@@ -177,7 +177,7 @@ axios.get(urlGetAllCardsOnBoard).then( (response) => {
 
             //Se achar a lista, agora vai atualizar o card pra ficar na lista
             if(findlist){
-                axios.put(encodeURI(`https://api.trello.com/1/cards/${find.id}?idList=${findlist.id}&pos=bottom&${aut}`))
+                axios.put(encodeURI(`https://api.trello.com/1/cards/${find.id}?idList=${findlist.id}&pos=bottom&key=${key}token=${token}`))
                 console.log('Card movido com sucesso!')
             }
             else{
@@ -579,6 +579,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         UpdateIntent,
+        MoveCardIntent,
         DeleteCardIntent,
         CreateListIntent,
         ReuniaoTopicsIntent,
