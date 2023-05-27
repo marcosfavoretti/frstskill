@@ -138,6 +138,17 @@ const CreateListIntent = {
     }
     
 }
+const MoveCardIntent = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'MoveCardIntent';
+    },
+    
+        const listname = await handlerInput.requestEnvelope.request.intent.slots['nomelist'].value
+
+        const cardname = await handlerInput.requestEnvelope.request.intent.slots['card'].value
+    
+}
 
 const DeleteCardIntent = {
     canHandle(handlerInput) {
