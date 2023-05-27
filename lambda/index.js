@@ -161,12 +161,6 @@ const DeleteCardIntent = {
                 let urlDeleteCard = encodeURI('https://api.trello.com/1/cards/' + resp.data[i].id + '?key=17206af45468d8b12bd543f7f0bb3f86&token=ATTA87f2f270cd37b96abe400dd0bd72a39e50f6f257ef50b9a23c3f0635b6de28ca10C1494B')
                 await axios.delete(urlDeleteCard).then(response => {
                 console.log('Card deletado com sucesso: ', response.data);
-                return handlerInput.responseBuilder
-                .speak('card '+resp.data[i].name +' deletado')//o que ela fala
-                .reprompt()//esperando resposta fala
-                .getResponse();
-
-                
                 }).catch(error => {
                   console.log('Erro ao deletar o card: ', error);
                    return handlerInput.responseBuilder
@@ -178,13 +172,10 @@ const DeleteCardIntent = {
         }
     }
 }
-else{
-         console.log('sem resposta');
-                   return handlerInput.responseBuilder
-                .speak('error')//o que ela fala
+ return handlerInput.responseBuilder
+                .speak('card '+ cardname+' deletado')//o que ela fala
                 .reprompt()//esperando resposta fala
-                .getResponse(); 
-}
+                .getResponse();
     }
 }
 
