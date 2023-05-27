@@ -145,7 +145,7 @@ const MoveCardIntent = {
     },
         async handle(handlerInput) {
 
-        const listname = await handlerInput.requestEnvelope.request.intent.slots['nomelist'].value
+        const listname = await handlerInput.requestEnvelope.request.intent.slots['listname'].value
 
         const cardname = await handlerInput.requestEnvelope.request.intent.slots['card'].value
         
