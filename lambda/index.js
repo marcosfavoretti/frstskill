@@ -170,7 +170,7 @@ await axios.get(urlGetAllCardsOnBoard).then( (response) => {
 
     //Se achar o card, agora vai procurar a lista
     if(find !== ''){
-        axios.get(`https://api.trello.com/1/boards/${boardID}/lists?$key=${key}&token=${token}`).then(response => {
+        axios.get(`https://api.trello.com/1/boards/${boardID}/lists?key=${key}&token=${token}`).then(response => {
             for( let i in response.data){
                 if(response.data[i].name === listname){
                     findlist = response.data[i]
