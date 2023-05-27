@@ -176,7 +176,7 @@ axios.get(urlGetAllCardsOnBoard).then( (response) => {
         
 
             //Se achar a lista, agora vai atualizar o card pra ficar na lista
-            if(findlist){
+            if(findlist !== ''){
                 axios.put(encodeURI(`https://api.trello.com/1/cards/${find.id}?idList=${findlist.id}&pos=bottom&key=${key}token=${token}`))
                 console.log('Card movido com sucesso!')
                  return handlerInput.responseBuilder
@@ -185,7 +185,7 @@ axios.get(urlGetAllCardsOnBoard).then( (response) => {
             .getResponse();
             }
             else{
-                return handlerInput.responseBuilder
+            return handlerInput.responseBuilder
             .speak('nao foi possivel')//o que ela fala
             .reprompt()//esperando resposta fala
             .getResponse();
