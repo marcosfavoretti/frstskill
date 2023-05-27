@@ -27,7 +27,7 @@ const LaunchRequestHandler = {
 };//respota da alexa
 const SignPersonIntent = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
         && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SignPersonIntent';
     },
     async handle(handlerInput) {
