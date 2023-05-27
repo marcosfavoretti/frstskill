@@ -156,7 +156,7 @@ let find = ''
 let findlist = ''
 const urlGetAllCardsOnBoard = `https://api.trello.com/1/boards/${boardID}/cards?key=${key}&token=${token}`
 
-axios.get(urlGetAllCardsOnBoard).then( (response) => {
+await axios.get(urlGetAllCardsOnBoard).then( (response) => {
     //Achou o card que vai ser movido
     //const card = response.data.find( c => c.name === cardToBeMoved )
     for( let i in response.data){
