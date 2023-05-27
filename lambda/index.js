@@ -148,8 +148,8 @@ const DeleteCardIntent = {
     const cardname = await handlerInput.requestEnvelope.request.intent.slots['nomeCard'].value
     
     const urlGetCards =encodeURI( `https://api.trello.com/1/boards/${boardID}/cards?&key=${key}&token${token}`)
- 
-    axios.get(urlGetCards).then(resp => {
+    
+    await axios.get(urlGetCards).then(resp => {
     console.log('antes do resp')
     if (resp) {
         console.log('delete intent')
@@ -159,7 +159,7 @@ const DeleteCardIntent = {
             console.log(resp.data[i].name + cardname)
             if(resp.data[i].name === cardname){
                 let urlDeleteCard = encodeURI('https://api.trello.com/1/cards/' + resp.data[i].id + '?' + 'key='+key+'&token='+ token)
-                axios.delete(urlDeleteCard).then(response => {
+                await  axios.delete(urlDeleteCard).then(response => {
                 console.log('Card deletado com sucesso: ', response.data);
                 return handlerInput.responseBuilder
                 .speak('card '+resp.data[i].name +' deletado')//o que ela fala
