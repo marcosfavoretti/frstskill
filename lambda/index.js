@@ -396,7 +396,7 @@ const UpdateIntent = {
         });
             
             return handlerInput.responseBuilder
-            .speak(cardName, fieldName, newValue, cardID, boardID)//o que ela fala
+            .speak("cartão "+ cardName + "foi atulaizado o campo"+ fieldName)//o que ela fala
             .reprompt()//esperando resposta fala
             .getResponse();
 
