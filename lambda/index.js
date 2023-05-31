@@ -17,7 +17,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'funcionou';
+        const speakOutput = 'lauch funcionou';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)//o que ela fala
@@ -120,7 +120,7 @@ const MarkersIntent = {
             //setar a importancia do card
         }
         return handlerInput.responseBuilder
-            .speak('funcionou')//o que ela fala
+            .speak(`card ${cardName} marcado com sucesso`)//o que ela fala
             .reprompt()//esperando resposta fala
             .getResponse();
 
@@ -218,7 +218,6 @@ await axios.get(urlGetAllCardsOnBoard).then( (response) => {
     for( let i in response.data){
         console.log(response.data[i].name)
         if(response.data[i].name === cardname){
-            console.log('aki achouuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
             find = response.data[i]
         }
     }
@@ -267,7 +266,7 @@ await axios.get(urlGetAllCardsOnBoard).then( (response) => {
             .getResponse();
 })
 return handlerInput.responseBuilder
-            .speak('card movido com sucesso')//o que ela fala
+            .speak('card'+cardname+' movido com sucesso para lista'+ listname)//o que ela fala
             .reprompt()//esperando resposta fala
             .getResponse();
    
@@ -307,7 +306,7 @@ const DeleteCardIntent = {
     }
 }
  return handlerInput.responseBuilder
-                .speak('card '+ cardname+' deletado')//o que ela fala
+                .speak('card '+ cardname+' deletado com sucesso')//o que ela fala
                 .reprompt()//esperando resposta fala
                 .getResponse();
     }
