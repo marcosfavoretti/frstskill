@@ -17,7 +17,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Gerenciador de tarefas inicado';
+        const speakOutput = 'pronto para uso';
 
         return handlerInput.responseBuilder
             .speak(speakOutput)//o que ela fala
