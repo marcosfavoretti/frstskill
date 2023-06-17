@@ -25,6 +25,45 @@ const LaunchRequestHandler = {
             .getResponse();
     }
 };//respota da alexa
+async function label_create(){
+let res = await axios.get(`https://api.trello.com/1/boards/${id}/labels?key=${key}&token=${token}`)
+    //console.log(res.data)
+    
+    console.log(res.data)
+    let urgente = false
+    let murgente = false
+    let surgente = false
+
+    let urgenteid = ''
+    let murgenteid = ''
+    let surgenteid = ''
+
+    for( let label in res.data){
+        console.log('entrou no for')
+        if(res.data[label].name === 'urgente'){
+            urgente= true
+            urgenteid = res.data[label].id
+        }
+        if(res.data[label].name === 'média urgência'){
+            murgente = true
+            murgenteid = res.data[label].id
+        }
+        if(res.data[label].name === 'sem urgência'){
+            surgente = true
+            surgenteid = res.data[label].id
+        }
+    }
+
+    if(!surgente){
+        await  axios.post(encodeURI(`https://api.trello.com/1/boards/${id}/labels?name=sem urgência&color=green&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
+    }
+    if(!murgente){
+        await  axios.post(encodeURI(`https://api.trello.com/1/boards/${id}/labels?name=média urgência&color=yellow&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
+    }
+    if(!urgente){
+        await axios.post(`https://api.trello.com/1/boards/${id}/labels?name=urgente&color=red&key=${key}&token=${token}`).then(()=>{console.log('criado com sucess')})
+    }
+}
 const ImporatanceIntent = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
