@@ -96,11 +96,6 @@ if(findout){
     }
     await axios.post(`https://api.trello.com/1/cards/${findout.id}/idLabels?value=${labelid}&key=${key}&token=${token}`).then(()=>console.log('foi colocado a importancia'))
 }
-else{
-    return
-}
-
-      
     return handlerInput.responseBuilder
             .speak('pessoa atribuida ao card')//o que ela fala
             .reprompt()//esperando resposta fala
