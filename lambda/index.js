@@ -61,7 +61,7 @@ let res = await axios.get(`https://api.trello.com/1/boards/${boardID}/labels?key
         await  axios.post(encodeURI(`https://api.trello.com/1/boards/${boardID}/labels?name=média urgência&color=yellow&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
     }
     if(!urgente){
-        await axios.post(`https://api.trello.com/1/boards/${boardID}/labels?name=urgente&color=red&key=${key}&token=${token}`).then(()=>{console.log('criado com sucess')})
+        await axios.post(encodeURI(`https://api.trello.com/1/boards/${boardID}/labels?name=urgente&color=red&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
     }
 }
 const ImporatanceIntent = {
