@@ -40,7 +40,7 @@ let res = await axios.get(`https://api.trello.com/1/boards/${boardID}/labels?key
 
     for( let label in res.data){
         console.log('entrou no for')
-        if(res.data[label].name === 'urgência'){
+        if(res.data[label].name === 'urgente'){
             urgente= true
             urgenteid = res.data[label].id
         }
