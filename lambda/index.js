@@ -338,71 +338,7 @@ const ReuniaoTopicsIntent = {
     
 }
 
-/*const UpdateIntent = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'UpdateIntent';
-    },
-    async handle(handlerInput) {
-        
-       const speakOutput = 'funcionou';
-        
-         let cardName = await handlerInput.requestEnvelope.request.intent.slots['nome'].value//pega o filtro de dias
-        
-         let fieldName =await handlerInput.requestEnvelope.request.intent.slots['campo'].value//pega o filtro de dias
-        
-         let newValue =await handlerInput.requestEnvelope.request.intent.slots['newvalue'].value//pega o filtro de dias
-         
-        // console.log(cardName, fieldName, newValue)
-        console.log(newValue)
-         console.log(CheckDate(newValue))
-         
-    //Caso for uma data, tratar conforme abaixo
-    if (CheckDate(newValue)) {
-        newValue = new Date(newValue);
-    }
 
-    let cardID = ''
-        //URL para adquirir todos os cartões
-    let url = `https://api.trello.com/1/boards/${boardID}/cards?key=${key}&token=${token}`;
-    console.log(url)
-    axios.get(encodeURI(url))
-        .then((response) => {
-            //Adquire o ID do cartão que será atualizado
-            //const obj = JSON.parse(JSON.stringify(response.data))
-            const obj = response.data
-            console.log('---------------------------------------------->', cardName)
-            
-            //const target = obj.filter((cartao) => cartao.name === cardName)
-             for (let i = 0; i < response.data.length; i++) {
-                console.log(response.data[i].name, cardName)
-                if (response.data[i].name === cardName) {
-                    let target = response.data[i]
-                    cardID = target.id;
-                }
-            }
-            
-
-            //Atualiza o cartão
-            let urlCard = `https://api.trello.com/1/cards/${cardID}?key=${key}&token=${token}`;
-           // console.log(urlCard)
-            let parameter = alexaDictionary[fieldName]+'='+newValue; //Note que estou usando o alexaDictionary para traduzir o input da Alexa
-            console.log('-------------------->',urlCard,parameter);
-            axios.put(encodeURI(urlCard), parameter);
-                 
-            
-        }).catch((err) => { //Manuseia erro caso não encontrado
-            console.log(`Error: ${err}`);
-        });
-            
-            return handlerInput.responseBuilder
-            .speak("cartão "+ cardName + "foi atulaizado o campo"+ fieldName)//o que ela fala
-            .reprompt()//esperando resposta fala
-            .getResponse();
-
-       
-    }
-}*/
 const UpdateIntent = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
