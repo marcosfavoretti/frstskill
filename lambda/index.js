@@ -25,6 +25,20 @@ const LaunchRequestHandler = {
             .getResponse();
     }
 };//respota da alexa
+const ImporatanceIntent = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ImporatanceIntent';
+    },
+    async handle(handlerInput) {
+        
+      
+    return handlerInput.responseBuilder
+            .speak('pessoa atribuida ao card')//o que ela fala
+            .reprompt()//esperando resposta fala
+            .getResponse();
+    }
+}
 
 const SignPersonIntent = {
     canHandle(handlerInput) {
