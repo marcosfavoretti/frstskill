@@ -40,28 +40,28 @@ let res = await axios.get(`https://api.trello.com/1/boards/${boardID}/labels?key
 
     for( let label in res.data){
         console.log('entrou no for')
-        if(res.data[label].name === 'urgência'){
+        if(res.data[label].name === 'alta importância'){
             urgente= true
             urgenteid = res.data[label].id
         }
-        if(res.data[label].name === 'média urgência'){
+        if(res.data[label].name === 'importância média'){
             murgente = true
             murgenteid = res.data[label].id
         }
-        if(res.data[label].name === 'sem urgência'){
+        if(res.data[label].name === 'menor importância'){
             surgente = true
             surgenteid = res.data[label].id
         }
     }
 
     if(!surgente){
-        await  axios.post(encodeURI(`https://api.trello.com/1/boards/${boardID}/labels?name=sem urgência&color=green&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
+        await  axios.post(encodeURI(`https://api.trello.com/1/boards/${boardID}/labels?name=menor importância&color=green&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
     }
     if(!murgente){
-        await  axios.post(encodeURI(`https://api.trello.com/1/boards/${boardID}/labels?name=média urgência&color=yellow&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
+        await  axios.post(encodeURI(`https://api.trello.com/1/boards/${boardID}/labels?name=importância média&color=yellow&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
     }
     if(!urgente){
-        await axios.post(encodeURI(`https://api.trello.com/1/boards/${boardID}/labels?name=urgência&color=red&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
+        await axios.post(encodeURI(`https://api.trello.com/1/boards/${boardID}/labels?name=menor importância&color=red&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
     }
 }
 const ImporatanceIntent = {
