@@ -34,7 +34,7 @@ const ImporatanceIntent = {
         
         const card = await handlerInput.requestEnvelope.request.intent.slots['cardname'].value//pega o filtro de dias
         let findout = '';
-        const importance = await handlerInput.requestEnvelope.request.intent.slots['{urgencialv}'].value//pega o filtro de dias
+        const importance = await handlerInput.requestEnvelope.request.intent.slots['urgencialv'].value//pega o filtro de dias
         
         
         
