@@ -55,13 +55,13 @@ let res = await axios.get(`https://api.trello.com/1/boards/${id}/labels?key=${ke
     }
 
     if(!surgente){
-        await  axios.post(encodeURI(`https://api.trello.com/1/boards/${id}/labels?name=sem urgência&color=green&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
+        await  axios.post(encodeURI(`https://api.trello.com/1/boards/${boardID}/labels?name=sem urgência&color=green&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
     }
     if(!murgente){
-        await  axios.post(encodeURI(`https://api.trello.com/1/boards/${id}/labels?name=média urgência&color=yellow&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
+        await  axios.post(encodeURI(`https://api.trello.com/1/boards/${boardID}/labels?name=média urgência&color=yellow&key=${key}&token=${token}`)).then(()=>{console.log('criado com sucess')})
     }
     if(!urgente){
-        await axios.post(`https://api.trello.com/1/boards/${id}/labels?name=urgente&color=red&key=${key}&token=${token}`).then(()=>{console.log('criado com sucess')})
+        await axios.post(`https://api.trello.com/1/boards/${boardID}/labels?name=urgente&color=red&key=${key}&token=${token}`).then(()=>{console.log('criado com sucess')})
     }
 }
 const ImporatanceIntent = {
@@ -75,7 +75,7 @@ const ImporatanceIntent = {
         let findout = '';
         const importance = await handlerInput.requestEnvelope.request.intent.slots['urgencialv'].value//pega o filtro de dias
         await label_create()
-        const urlGetCards = `https://api.trello.com/1/boards/${idBoard}/cards?key=${key}&token=${token}`
+        const urlGetCards = `https://api.trello.com/1/boards/${boardID}/cards?key=${key}&token=${token}`
 
 await axios.get(urlGetCards).then(response => {
     for( let i in response.data){
@@ -87,7 +87,7 @@ await axios.get(urlGetCards).then(response => {
 })
 if(findout){
     let labelid = ''
-    let res = await axios.get(`https://api.trello.com/1/boards/${idBoard}/labels?key=${key}&token=${token}`)
+    let res = await axios.get(`https://api.trello.com/1/boards/${boardID}/labels?key=${key}&token=${token}`)
     for( let label in res.data){
         if(res.data[label].name === importance){
             console.log(res.data[label].id)
