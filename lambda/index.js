@@ -32,6 +32,38 @@ const ImporatanceIntent = {
     },
     async handle(handlerInput) {
         
+        const card = await handlerInput.requestEnvelope.request.intent.slots['cardname'].value//pega o filtro de dias
+        let findout = '';
+        const importance = await handlerInput.requestEnvelope.request.intent.slots['{urgencialv}'].value//pega o filtro de dias
+        
+        
+        
+    await label_create()
+    const urlGetCards = `https://api.trello.com/1/boards/${id}/cards?key=${key}&token=${token}`
+
+await axios.get(urlGetCards).then(response => {
+    for( let i in response.data){
+        if(response.data[i].name === cardname){
+            findout = response.data[i]
+            break
+        }
+    }
+})
+if(findout){
+    let labelid = ''
+    let res = await axios.get(`https://api.trello.com/1/boards/${id}/labels?key=${key}&token=${token}`)
+    for( let label in res.data){
+        if(res.data[label].name === importance){
+            console.log(res.data[label].id)
+            labelid = res.data[label].id
+        }
+    }
+    await axios.post(`https://api.trello.com/1/cards/${findout.id}/idLabels?value=${labelid}&key=${key}&token=${token}`).then(()=>console.log('foi colocado a importancia'))
+}
+else{
+    return
+}
+}
       
     return handlerInput.responseBuilder
             .speak('pessoa atribuida ao card')//o que ela fala
