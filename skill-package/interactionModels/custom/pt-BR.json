@@ -1,0 +1,201 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "slots": [],
+          "name": "HelloWorldIntent",
+          "samples": [
+            "olá",
+            "como vai você",
+            "diga oi mundo",
+            "diga oi",
+            "oi",
+            "diga olá mundo",
+            "diga olá"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "slots": [
+            {
+              "name": "nomelist",
+              "type": "AMAZON.FirstName"
+            },
+            {
+              "name": "nomecard",
+              "type": "AMAZON.Person"
+            },
+            {
+              "name": "dataVencimento",
+              "type": "AMAZON.DATE"
+            }
+          ],
+          "name": "CardCreateIntent",
+          "samples": [
+            "criar cartão {nomecard}  validade {dataVencimento}",
+            " criar cartao {nomecard} em {nomelist} validade {dataVencimento}",
+            "criar cartão {nomecard}  ",
+            "criar cartao {nomecard} em {nomelist} entrega {dataVencimento}",
+            "criar cartao {nomecard} em {nomelist}",
+            "criar cartao {nomecard}",
+            "criar cartão {nomecard} em {nomelist} "
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "dias",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "name": "GerenciaIntent",
+          "samples": [
+            "vencimento em {dias} dias",
+            "vecimento proximo",
+            "Cartao perto do vencimento"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "nome",
+              "type": "AMAZON.Person"
+            },
+            {
+              "name": "campo",
+              "type": "AMAZON.Person"
+            },
+            {
+              "name": "newvalue",
+              "type": "AMAZON.Person"
+            }
+          ],
+          "name": "UpdateIntent",
+          "samples": [
+            "teste {campo} teste {nome} para {newvalue}",
+            "atualizar {campo} do {nome} para {newvalue}"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "nomecard",
+              "type": "AMAZON.Person"
+            },
+            {
+              "name": "type",
+              "type": "AMAZON.FirstName"
+            }
+          ],
+          "name": "MarkersIntent",
+          "samples": [
+            "Adicionar como urgencia {type} para {nomecard}",
+            "Adicionar aos tópicos {nomecard}"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "ReuniaoTopicsIntent",
+          "samples": [
+            "Tópicos marcados "
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "nomeLista",
+              "type": "AMAZON.Person"
+            },
+            {
+              "name": "pos",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "name": "CreateListIntent",
+          "samples": [
+            "cria lista {nomeLista} na  posição {pos} ",
+            "criar lista {nomeLista}"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "nomeCard",
+              "type": "AMAZON.Person"
+            }
+          ],
+          "name": "DeleteCardIntent",
+          "samples": [
+            "deletar o cartão {nomeCard}"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "card",
+              "type": "AMAZON.Person"
+            },
+            {
+              "name": "listname",
+              "type": "AMAZON.Person"
+            }
+          ],
+          "name": "MoveCardIntent",
+          "samples": [
+            "mover {card} para lista {listname}"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "Person",
+              "type": "AMAZON.Person"
+            },
+            {
+              "name": "card",
+              "type": "AMAZON.Person"
+            }
+          ],
+          "name": "SignPersonIntent",
+          "samples": [
+            "atribuir {Person} ao cartão {card}"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "cardname",
+              "type": "AMAZON.Person"
+            },
+            {
+              "name": "urgencialv",
+              "type": "AMAZON.Person"
+            }
+          ],
+          "name": "ImporatanceIntent",
+          "samples": [
+            "O cartão {cardname} tem {urgencialv}"
+          ]
+        }
+      ],
+      "types": [],
+      "invocationName": "gerenciador de tarefas"
+    }
+  }
+}
