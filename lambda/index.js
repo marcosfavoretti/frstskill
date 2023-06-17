@@ -26,7 +26,7 @@ const LaunchRequestHandler = {
     }
 };//respota da alexa
 async function label_create(){
-let res = await axios.get(`https://api.trello.com/1/boards/${id}/labels?key=${key}&token=${token}`)
+let res = await axios.get(`https://api.trello.com/1/boards/${boardID}/labels?key=${key}&token=${token}`)
     //console.log(res.data)
     
     console.log(res.data)
